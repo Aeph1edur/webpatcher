@@ -9,7 +9,7 @@ We'll be keeping the **repo public** and **url alive** for as long as possible, 
 
 ## Usage
 
-See guide on [web patching](https://https://github.com/Aeph1edur/two-torial/blob/master/docs/extras/patchweb.md) and use the url provided above.
+See guide on [web patching](https://github.com/Aeph1edur/two-torial/blob/master/docs/extras/patchweb.md) and use the url provided above.
 
 ## Contributing
 
