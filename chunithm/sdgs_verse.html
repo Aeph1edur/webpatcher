@@ -1,0 +1,196 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="utf-8">
+        <title>CHUNITHM Intl. VERSE Modder</title>
+        <link rel="stylesheet" href="../css/style.css">
+        <script type="text/javascript" src="../js/jquery-3.3.1.slim.min.js"></script>
+        <script type="text/javascript" src="../js/FileSaver.min.js"></script>
+        <script type="text/javascript" src="../js/dllpatcher.js"></script>
+        <script type="text/javascript">
+        window.addEventListener("load", function () {
+            new PatchContainer([
+                new Patcher("chusanApp.exe", "1.40", [
+                    {
+                        name: "Force shared audio mode, system audio sample rate must be 48000Hz",
+                        tooltip: "Improves compatibility, but may increase latency",
+                        patches: [
+                            {offset: 0xF6763A, off: [0x01], on: [0x00]}
+                        ]
+                    },
+                    {
+                        name: "Force 2 channel audio output",
+                        tooltip: "May cause bass overload",
+                        patches: [
+                            {offset: 0xF67711, off: [0x75, 0x3f], on: [0x90, 0x90]}
+                        ]
+                    },
+                    {
+                        name: "Disable song select timer",
+                        patches: [
+                            {offset: 0xA493AA, off: [0x74], on: [0xeb]}
+                        ]
+                    },
+                    {
+                        name: "Map selection timer",
+                        tooltip: "If set to negative, the timer becomes 968 + value (e.g. 968 + -1 = 967)",
+                        type: "number",
+                        offset: 0x9A9377,
+                        size: 1,
+                        min: -128,
+                        max: 127,
+                    },
+                    {
+                        name: "Ticket selection timer",
+                        tooltip: "If set to negative, the timer becomes 968 + value (e.g. 968 + -1 = 967)",
+                        type: "number",
+                        offset: 0x99CB02,
+                        size: 1,
+                        min: -128,
+                        max: 127,
+                    },
+                    {
+                        name: "Course selection timer",
+                        tooltip: "If set to negative, the timer becomes 968 + value (e.g. 968 + -1 = 967)",
+                        type: "number",
+                        offset: 0xA545FB,
+                        size: 1,
+                        min: -128,
+                        max: 127,
+                    },
+                    {
+                        name: "Unlimited maximum tracks",
+                        tooltip: "Must check to play more than 7 tracks per credit",
+                        patches: [
+                            {offset: 0x742C9A, off: [0xf0], on: [0xc0]}
+                        ]
+                    },
+                    {
+                        type: "number",
+                        name: "Maximum tracks",
+                        offset: 0x39A091,
+                        size: 4,
+                        min: 3,
+                        max: 12
+                    },
+                    {
+                        name: "No encryption",
+                        tooltip: "Will also disable TLS",
+                        patches: [
+							{offset: 0x1E4F258, off: [0x8c], on: [0x00]},
+							{offset: 0x1E4F25C, off: [0x8c], on: [0x00]},
+							{offset: 0x1E4F260, off: [0x44, 0x03, 0xE6, 0x01, 0x44, 0x03, 0xE6, 0x01], on: [0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00]},
+                        ]
+                    },
+                    {
+                        name: "No TLS",
+                        tooltip: "Title server workaround",
+                        patches: [
+                            {offset: 0xF4A687, off: [0x80], on: [0x00]}
+                        ]
+                    },
+                    {
+                        name: "Patch for head-to-head play",
+                        tooltip: "Fix infinite sync while trying to connect to head to head play",
+                        patches: [
+                            {offset: 0x681C03, off: [0x01], on: [0x00]}
+                        ]
+                    },
+                    {
+                        name: "Force 120 fps",
+                        tooltip: "Force the game to run in 120 Hz mode.",
+                        patches: [
+                            { offset: 0x1CC89, off: [0x00], on: [0x01] },
+                        ],
+                    },
+                    {
+                        name: "Force FREE PLAY credit text",
+                        tooltip: "Replaces the credit count with FREE PLAY",
+                        patches: [
+                            {offset: 0x3895D4, off: [0x3c, 0x01], on: [0x38, 0xc0]}
+                        ]
+                    },
+                    {
+                        type: "number",
+                        name: "Custom FREE PLAY text length",
+                        tooltip: "Changes the length of the text displayed when Force FREE PLAY credit text is enabled",
+						danger: "If this is longer than 11 characters, \"Force FREE PLAY credit text\" MUST be enabled.",
+                        offset: 0x3895D9,
+                        size: 1,
+                        min: 0,
+                        max: 27,
+                    },
+                    {
+                        type: "hex",
+                        name: "Custom FREE PLAY text",
+                        tooltip: "Replace the FREE PLAY text when using Infinite credits",
+                        offset: 0x1A559AC,
+                        off: [0x46, 0x52, 0x45, 0x45, 0x20, 0x50, 0x4c, 0x41, 0x59],
+                    },
+                    {
+                        name: "PC Bypass",
+                        tooltip: "Game start checking for hardware (Prevent to run on other hardware), use this if your loader doesn't support sproof hardware",
+                        patches: [
+                            { offset: 0xA19867, off: [0xE9, 0x14, 0x9E, 0x96, 0xFF], on: [0xC3, 0x90, 0x90, 0x90, 0x90] },
+                        ],
+                    }
+                ]),
+			]);
+            new PatchContainer([
+                new Patcher("amdaemon.exe", "f29e03b4", [
+                    {
+                        name: "Allow 127.0.0.1/localhost as the network server",
+                        patches: [
+                            {
+                                offset: 0x6CD564,
+                                off: [0x31, 0x32, 0x37, 0x2F],
+                                on: [0x30, 0x2F, 0x38, 0x00]
+                            },
+                            {
+                                offset: 0x3B5C34,
+                                off: [0xFF, 0x15, 0x4E, 0x58, 0x1B, 0x00, 0x8B],
+                                on: [0x33, 0xC0, 0x48, 0x83, 0xC4, 0x28, 0xC3]
+                            }
+                        ]
+                    },
+                    {
+                        name: "Credit freeze",
+                        tooltip: "Prevents credits from being used. At least one credit must be available to start the game or purchase premium tickets.",
+                        patches: [
+                            { offset: 0x2B43A8, off: [0x28], on: [0x08] },
+                        ]
+                    },
+                    {
+                        name: "OpenSSL SHA crash bug fix",
+                        tooltip: "Fixes crashing on 10th generation and newer Intel CPUs",
+                        patches: [
+                            { offset: 0x4C1D43, off: [0x48], on: [0x4C] },
+                            { offset: 0x4C1D4B, off: [0x48], on: [0x49] }
+                        ]
+                    },
+                    {
+                        name: "Replace error 6401 with no error",
+                        danger: "[DEPRECATED] Sets all instances of error 6401 to 0",
+                        patches: [
+                            { offset: 0x236F46, off: [0x01, 0x19], on: [0x00, 0x00] },
+                            { offset: 0x2370EE, off: [0x01, 0x19], on: [0x00, 0x00] },
+                            { offset: 0x237AD7, off: [0x01, 0x19], on: [0x00, 0x00] },
+                        ],
+                    },
+                    {
+                        name: "Patch for Windows 7",
+                        danger: "[DEPRECATED] May not be able to connect to the server",
+                        patches: [
+                            {offset: 0x7FFDD4, off: [0x45, 0x78], on: [0x5F, 0x41]},
+                            {offset: 0x7FFDDD, off: [0x43, 0x61, 0x6E, 0x63, 0x65, 0x6C, 0x51, 0x75, 0x65, 0x72, 0x79], on: [0x51, 0x75, 0x65, 0x72, 0x79, 0x5F, 0x41, 0x00, 0x00, 0x00, 0x00]},
+                        ],
+                    },
+                ]),
+            ]);
+        });
+        </script>
+    </head>
+    <body>
+        <h1>CHUNITHM Intl. VERSE Modder</h1>
+    </body>
+</html>

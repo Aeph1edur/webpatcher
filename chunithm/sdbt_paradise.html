@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="utf-8">
+        <title>CHUNITHM PARADISE Modder</title>
+        <link rel="stylesheet" href="../css/style.css">
+        <script type="text/javascript" src="../js/dllpatcher.js"></script>
+        <script type="text/javascript">
+            window.addEventListener("load", function () {
+                new PatchContainer([
+                new Patcher("chuniApp.exe", "1.50", [
+                    {
+                        name: "Allow 127.0.0.1/localhost as the network server",
+                        patches: [
+                            {offset: 0x9B5BF0, off: [0x55, 0x8B, 0xEC], on: [0x31, 0xC0, 0xC3]},
+                            {offset: 0x1743510, off: [0x31, 0x32, 0x37, 0x2F], on: [0x30, 0x2F, 0x38, 0x00]}
+                        ]
+                    },
+                    {
+                        name: "Force shared audio mode, system audio samplerate must be 48000",
+                        tooltip: "Improves compatibility but may increase latency",
+                        patches: [
+                            {offset: 0xD1134A, off: [0x01], on: [0x00]},
+                        ],
+                    },
+                    {
+                        name: "Force 2 channel audio output",
+                        patches: [
+                            {offset: 0xD11421, off: [0x75, 0x3F], on: [0x90, 0x90]},
+                        ],
+                    },
+                    {
+                        name: "Disable Song Select Timer",
+                        tooltip: "May only work when playing with card.",
+                        patches: [
+                            {offset: 0x784A42, off: [0x74], on: [0xEB]},
+                        ],
+                    },
+                    {
+                        name: "Patch for head-to-head play",
+                        tooltip: "Fix infinite sync while trying to connect to head to head play.",
+                        patches: [
+                            {offset: 0x48C9B3, off: [0x01], on: [0x00]},
+                        ]
+                    },
+                    {
+                        name: "No Encryption",
+                        tooltip: "Title server workaround",
+                        patches: [
+                            {offset: 0x3E2832, off: [0x39], on: [0xC3]},
+                        ]
+                    },
+                    {
+                        name: "No TLS",
+                        tooltip: "Title server workaround",
+                        patches: [
+                            {offset: 0xD04D09, off: [0x81, 0xE3, 0x00, 0x00, 0x80, 0x00], on: [0x31, 0xDB, 0x90, 0x90, 0x90, 0x90]},
+                        ]
+                    }
+                ])
+                ]);
+            });
+        </script>
+    </head>
+    <body>
+        <h1>CHUNITHM PARADISE Modder</h1>
+    </body>
+</html>
+

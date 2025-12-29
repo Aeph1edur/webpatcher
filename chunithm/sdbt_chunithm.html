@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="utf-8">
+        <title>CHUNITHM Modder</title>
+        <link rel="stylesheet" href="../css/style.css">
+        <script type="text/javascript" src="../js/dllpatcher.js"></script>
+        <script type="text/javascript">
+            window.addEventListener("load", function () {
+			new PatchContainer([
+                new Patcher("chuniApp.exe", "1.00", [
+                    {
+                        name: "Allow 127.0.0.1 as the network server",
+                        patches: [
+                            {offset: 0x766E80, off: [0x55, 0x8B, 0xEC], on: [0x31, 0xC0, 0xC3]},
+                            {offset: 0x13B63E8, off: [0x31, 0x32, 0x37, 0x2F], on: [0x30, 0x2F, 0x38, 0x00]}
+                        ]
+                    },
+                    {
+                        name: "Force shared audio mode, system audio samplerate must be 48000",
+                        tooltip: "Improves compatibility but may increase latency",
+                        patches: [
+                            {offset: 0xB512CA, off: [0x01], on: [0x00]},
+                        ],
+                    },
+                    {
+                        name: "Force 2 channel audio output",
+                        patches: [
+                            {offset: 0xB513A1, off: [0x75, 0x3F], on: [0x90, 0x90]},
+                        ],
+                    },
+                    {
+                        name: "Disable Song Select Timer",
+                        tooltip: "May only work when playing with card.",
+                        patches: [
+                            {offset: 0x5AEA62, off: [0x74], on: [0xEB]},
+                        ],
+                    },
+                    {
+                        name: "Better patch for head-to-head play",
+                        tooltip: "Fix infinite sync while trying to connect to head to head play.",
+                        patches: [
+                            {offset: 0x3E5E13, off: [0x01], on: [0x00]},
+                        ]
+                    }
+				]),
+
+				new Patcher("chuniApp.exe", "1.01", [
+                    {
+                        name: "Allow 127.0.0.1 as the network server",
+                        patches: [
+                            {offset: 0x766ED0, off: [0x55, 0x8B, 0xEC], on: [0x31, 0xC0, 0xC3]},
+                            {offset: 0x13B6288, off: [0x31, 0x32, 0x37, 0x2F], on: [0x30, 0x2F, 0x38, 0x00]}
+                        ]
+                    },
+                    {
+                        name: "Force shared audio mode, system audio samplerate must be 48000",
+                        tooltip: "Improves compatibility but may increase latency",
+                        patches: [
+                            {offset: 0xB512AA, off: [0x01], on: [0x00]},
+                        ],
+                    },
+                    {
+                        name: "Force 2 channel audio output",
+                        patches: [
+                            {offset: 0xB51381, off: [0x75, 0x3F], on: [0x90, 0x90]},
+                        ],
+                    },
+                    {
+                        name: "Disable Song Select Timer",
+                        tooltip: "May only work when playing with card.",
+                        patches: [
+                            {offset: 0x5AEAA2, off: [0x74], on: [0xEB]},
+                        ],
+                    },
+                    {
+                        name: "Better patch for head-to-head play",
+                        tooltip: "Fix infinite sync while trying to connect to head to head play.",
+                        patches: [
+                            {offset: 0x3E61B3, off: [0x01], on: [0x00]},
+                        ]
+                    }
+                ]),
+
+                ]);
+            });
+        </script>
+
+    </head>
+    <body>
+        <h1>CHUNITHM Modder</h1>
+    </body>
+</html>

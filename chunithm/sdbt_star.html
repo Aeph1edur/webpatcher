@@ -1,0 +1,118 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="utf-8">
+        <title>CHUNITHM STAR Modder</title>
+        <link rel="stylesheet" href="../css/style.css">
+        <script type="text/javascript" src="../js/dllpatcher.js"></script>
+        <script type="text/javascript">
+            window.addEventListener("load", function () {
+			new PatchContainer([
+                new Patcher("chuniApp.exe", "1.20", [
+                    {
+                        name: "Allow 127.0.0.1 as the network server",
+                        patches: [
+                            {offset: 0x834630, off: [0x55, 0x8B, 0xEC], on: [0x31, 0xC0, 0xC3]},
+                            {offset: 0x1577C84, off: [0x31, 0x32, 0x37, 0x2F], on: [0x30, 0x2F, 0x38, 0x00]}
+                        ]
+                    },
+                    {
+                        name: "Force shared audio mode, system audio samplerate must be 48000",
+                        tooltip: "Improves compatibility but may increase latency",
+                        patches: [
+                            {offset: 0xBDFA2A, off: [0x01], on: [0x00]},
+                        ],
+                    },
+                    {
+                        name: "Force 2 channel audio output",
+                        patches: [
+                            {offset: 0xBDFB01, off: [0x75, 0x3F], on: [0x90, 0x90]},
+                        ],
+                    },
+                    {
+                        name: "Disable Song Select Timer",
+                        tooltip: "May only work when playing with card.",
+                        patches: [
+                            {offset: 0x67CA22, off: [0x74], on: [0xEB]},
+                        ],
+                    },
+                    {
+                        name: "Better patch for head-to-head play",
+                        tooltip: "Fix infinite sync while trying to connect to head to head play.",
+                        patches: [
+                            {offset: 0x3D9D33, off: [0x01], on: [0x00]},
+                        ]
+                    }
+				]),
+
+				new Patcher("chuniApp.exe", "1.25", [
+                    {
+                        name: "Allow 127.0.0.1 as the network server",
+                        patches: [
+                            {offset: 0x83C8A0, off: [0x55, 0x8B, 0xEC], on: [0x31, 0xC0, 0xC3]},
+                            {offset: 0x1595478, off: [0x31, 0x32, 0x37, 0x2F], on: [0x30, 0x2F, 0x38, 0x00]}
+                        ]
+                    },
+                  {
+                      name: "Force shared audio mode, system audio samplerate must be 48000",
+                      tooltip: "Improves compatibility but may increase latency",
+                      patches: [
+                          {offset: 0xBF4BFA, off: [0x01], on: [0x00]},
+                      ],
+                  },
+                  {
+                      name: "Force 2 channel audio output",
+                      patches: [
+                          {offset: 0xBF4CD1, off: [0x75, 0x3F], on: [0x90, 0x90]},
+                      ],
+                  },
+                  {
+                      name: "Disable Song Select Timer",
+                      tooltip: "May only work when playing with card.",
+                      patches: [
+                          {offset: 0x680652, off: [0x74], on: [0xEB]},
+                      ],
+                  },
+                  {
+                      name: "Better patch for head-to-head play",
+                      tooltip: "Fix infinite sync while trying to connect to head to head play.",
+                      patches: [
+                          {offset: 0x3D8C43, off: [0x01], on: [0x00]},
+                      ]
+                  }
+                ]),
+
+                ]);
+            });
+        </script>
+
+		<script type="text/javascript">
+            window.addEventListener("load", function () {
+			new PatchContainer([
+                new Patcher("aimeReaderHost.exe", "1.20", [
+				{
+                      name: "Change obfuscation to be compatible with segatools",
+                      tooltip: "(Scene Release Only) Patches 'aime.anbzvarg.wc' to 'nvzr.anbzvarg.wc' for Aime server check to work correctly.",
+                      patches: [
+                          {offset: 0xA83C4, off: [0x61, 0x69, 0x6D, 0x65, 0x2E, 0x61, 0x6E, 0x62, 0x7A, 0x76, 0x61, 0x72, 0x67, 0x2E, 0x77, 0x63], on: [0x6E, 0x76, 0x7A, 0x72, 0x2E, 0x61, 0x6E, 0x62, 0x7A, 0x76, 0x61, 0x72, 0x67, 0x2E, 0x77, 0x63]},
+                      ]
+                }
+                ]),
+                new Patcher("aimeReaderHost.exe", "1.25", [
+				{
+                      name: "Change obfuscation to be compatible with segatools",
+                      tooltip: "(Scene Release Only) Patches 'aime.anbzvarg.wc' to 'nvzr.anbzvarg.wc' for Aime server check to work correctly.",
+                      patches: [
+                          {offset: 0xAF43C, off: [0x61, 0x69, 0x6D, 0x65, 0x2E, 0x61, 0x6E, 0x62, 0x7A, 0x76, 0x61, 0x72, 0x67, 0x2E, 0x77, 0x63], on: [0x6E, 0x76, 0x7A, 0x72, 0x2E, 0x61, 0x6E, 0x62, 0x7A, 0x76, 0x61, 0x72, 0x67, 0x2E, 0x77, 0x63]},
+                      ]
+                }
+                ]),
+			]);
+            });
+        </script>
+
+    </head>
+    <body>
+        <h1>CHUNITHM STAR Modder</h1>
+    </body>
+</html>
