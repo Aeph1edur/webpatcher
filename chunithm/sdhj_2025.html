@@ -62,7 +62,7 @@
                     },
                     {
                         name: "PC Bypass",
-                        tooltip: "Game start checking for hardware, use this if your loader doesn't support sproof hardware",
+                        tooltip: "Game start checking for hardware (Prevent to run on other hardware), use this if your loader doesn't support sproof hardware",
                         patches: [
                             {offset: 0x9C3A87, off: [0xE9, 0x54, 0x01, 0x9C, 0xFF], on: [0xC3, 0x90, 0x90, 0x90, 0x90]},
                         ]
