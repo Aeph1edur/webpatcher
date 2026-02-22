@@ -1,10 +1,13 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="en">
     <head>
-        <meta charset="utf-8">
+        <meta charset="utf-8" />
         <title>CHUNITHM NEW PLUS!! Modder</title>
-        <link rel="stylesheet" href="../css/style.css">
-        <script type="text/javascript" src="../js/jquery-3.3.1.slim.min.js"></script>
+        <link rel="stylesheet" href="../css/style.css" />
+        <script
+            type="text/javascript"
+            src="../js/jquery-3.3.1.slim.min.js"
+        ></script>
         <script type="text/javascript" src="../js/FileSaver.min.js"></script>
         <script type="text/javascript" src="../js/dllpatcher.js"></script>
         <script type="text/javascript">
@@ -17,56 +20,74 @@
             }
             window.addEventListener("load", function () {
                 new PatchContainer([
-                new Patcher("chusanApp.exe", "2.05", [
-                    {
-                        name: "Force shared audio mode, system audio samplerate must be 48000",
-                        tooltip: "Improves compatibility but may increase latency",
-                        patches: [
-                            {offset: 0xE95D2A, off: [0x01], on: [0x00]},
-                        ],
-                    },
-                    {
-                        name: "Force 2 channel audio output",
-                        tooltip: "May cause bass overload",
-                        patches: [
-                            {offset: 0xE95E01, off: [0x75, 0x3F], on: [0x90, 0x90]},
-                        ],
-                    },
-                    {
-                        name: "Disable Song Select Timer",
-                        patches: [
-                            {offset: 0x98455B, off: [0x74], on: [0xEB]},
-                        ],
-                    },
-                    {
-                        name: "Patch for head-to-head play",
-                        tooltip: "Fix infinite sync while trying to connect to head to head play.",
-                        patches: [
-                            {offset: 0x609FB3, off: [0x01], on: [0x00]},
-                        ]
-                    },
-                    {
-                        name: "No Encryption",
-                        tooltip: "Title server workaround",
-                        patches: [
-                            {offset: 0x1D10640, off: [0xCD], on: [0x00]},
-                            {offset: 0x1D10644, off: [0xCD], on: [0x00]},
-                        ]
-                    },
-                ]),
+                    new Patcher("chusanApp.exe", "2.05", [
+                        {
+                            name: "Force shared audio mode, system audio samplerate must be 48000",
+                            tooltip:
+                                "Improves compatibility but may increase latency",
+                            patches: [
+                                { offset: 0xe95d2a, off: [0x01], on: [0x00] },
+                            ],
+                        },
+                        {
+                            name: "Force 2 channel audio output",
+                            tooltip: "May cause bass overload",
+                            patches: [
+                                {
+                                    offset: 0xe95e01,
+                                    off: [0x75, 0x3f],
+                                    on: [0x90, 0x90],
+                                },
+                            ],
+                        },
+                        {
+                            name: "Disable Song Select Timer",
+                            patches: [
+                                { offset: 0x98455b, off: [0x74], on: [0xeb] },
+                            ],
+                        },
+                        {
+                            name: "Patch for head-to-head play",
+                            tooltip:
+                                "Fix infinite sync while trying to connect to head to head play.",
+                            patches: [
+                                { offset: 0x609fb3, off: [0x01], on: [0x00] },
+                            ],
+                        },
+                        {
+                            name: "No Encryption",
+                            tooltip: "Title server workaround",
+                            patches: [
+                                { offset: 0x1d10640, off: [0xcd], on: [0x00] },
+                                { offset: 0x1d10644, off: [0xcd], on: [0x00] },
+                            ],
+                        },
+                    ]),
                 ]);
                 new PatchContainer([
-                new Patcher("amdaemon.exe", "2.00", [
-                    {
-                        name: "Replace error 6401 with no error",
-                        tooltip: "Sets all instances of error 6401 to 0",
-                        patches: [
-                            {offset: 0x222CF6, off: [0x01, 0x19], on: [0x00, 0x00]},
-                            {offset: 0x222E9E, off: [0x01, 0x19], on: [0x00, 0x00]},
-                            {offset: 0x223887, off: [0x01, 0x19], on: [0x00, 0x00]},
-                        ],
-                    },
-                ])
+                    new Patcher("amdaemon.exe", "2.00", [
+                        {
+                            name: "Replace error 6401 with no error",
+                            tooltip: "Sets all instances of error 6401 to 0",
+                            patches: [
+                                {
+                                    offset: 0x222cf6,
+                                    off: [0x01, 0x19],
+                                    on: [0x00, 0x00],
+                                },
+                                {
+                                    offset: 0x222e9e,
+                                    off: [0x01, 0x19],
+                                    on: [0x00, 0x00],
+                                },
+                                {
+                                    offset: 0x223887,
+                                    off: [0x01, 0x19],
+                                    on: [0x00, 0x00],
+                                },
+                            ],
+                        },
+                    ]),
                 ]);
             });
         </script>
