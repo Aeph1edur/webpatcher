@@ -22,11 +22,11 @@
                 new PatchContainer([
                     new Patcher("chusanApp.exe", "1.15", [
                         {
-                            name: "Force shared audio mode, system audio samplerate must be 48000",
+                            name: "Force shared audio mode",
                             tooltip:
                                 "Improves compatibility but may increase latency",
                             patches: [
-                                { offset: 0xe8cd7a, off: [0x01], on: [0x00] },
+                                { offset: 0xE8CD7A, off: [0x01], on: [0x00] },
                             ],
                         },
                         {
@@ -34,8 +34,8 @@
                             tooltip: "May cause bass overload",
                             patches: [
                                 {
-                                    offset: 0xe8ce51,
-                                    off: [0x75, 0x3f],
+                                    offset: 0xE8CE51,
+                                    off: [0x75, 0x3F],
                                     on: [0x90, 0x90],
                                 },
                             ],
@@ -43,15 +43,15 @@
                         {
                             name: "Disable Song Select Timer",
                             patches: [
-                                { offset: 0x98307b, off: [0x74], on: [0xeb] },
+                                { offset: 0x98307B, off: [0x74], on: [0xEB] },
                             ],
                         },
                         {
-                            name: "No Encryption and tls",
+                            name: "No Encryption and TLS",
                             tooltip: "This will also disable TLS",
                             patches: [
                                 {
-                                    offset: 0x1cfb158,
+                                    offset: 0x1CFA758,
                                     off: [
                                         0x73, 0x00, 0x00, 0x00, 0x73, 0x00,
                                         0x00, 0x00,
@@ -67,7 +67,109 @@
                             name: "Force 120 fps",
                             tooltip: "Force the game to run in 120 Hz mode.",
                             patches: [
-                                { offset: 0x1cbe9, off: [0x00], on: [0x01] },
+                                { offset: 0x1CBE9, off: [0x00], on: [0x01] },
+                            ],
+                        },
+                    ]),
+                    new Patcher("chusanApp.exe", "1.16", [
+                        {
+                            name: "Force shared audio mode",
+                            tooltip:
+                                "Improves compatibility but may increase latency",
+                            patches: [
+                                { offset: 0xE8D02A, off: [0x01], on: [0x00] },
+                            ],
+                        },
+                        {
+                            name: "Force 2 channel audio output",
+                            tooltip: "May cause bass overload",
+                            patches: [
+                                {
+                                    offset: 0xE8D101,
+                                    off: [0x75, 0x3F],
+                                    on: [0x90, 0x90],
+                                },
+                            ],
+                        },
+                        {
+                            name: "Disable Song Select Timer",
+                            patches: [
+                                { offset: 0x98332B, off: [0x74], on: [0xEB] },
+                            ],
+                        },
+                        {
+                            name: "No Encryption and TLS",
+                            tooltip: "This will also disable TLS",
+                            patches: [
+                                {
+                                    offset: 0x1CFAB58,
+                                    off: [
+                                        0x73, 0x00, 0x00, 0x00, 0x73, 0x00,
+                                        0x00, 0x00,
+                                    ],
+                                    on: [
+                                        0x00, 0x00, 0x00, 0x00, 0x00, 0x00,
+                                        0x00, 0x00,
+                                    ],
+                                },
+                            ],
+                        },
+                        {
+                            name: "Force 120 fps",
+                            tooltip: "Force the game to run in 120 Hz mode.",
+                            patches: [
+                                { offset: 0x1CBE9, off: [0x00], on: [0x01] },
+                            ],
+                        },
+                    ]),
+                    new Patcher("chusanApp.exe", "1.17", [
+                        {
+                            name: "Force shared audio mode",
+                            tooltip:
+                                "Improves compatibility but may increase latency",
+                            patches: [
+                                { offset: 0xE8D12A, off: [0x01], on: [0x00] },
+                            ],
+                        },
+                        {
+                            name: "Force 2 channel audio output",
+                            tooltip: "May cause bass overload",
+                            patches: [
+                                {
+                                    offset: 0xE8D201,
+                                    off: [0x75, 0x3F],
+                                    on: [0x90, 0x90],
+                                },
+                            ],
+                        },
+                        {
+                            name: "Disable Song Select Timer",
+                            patches: [
+                                { offset: 0x98342B, off: [0x74], on: [0xEB] },
+                            ],
+                        },
+                        {
+                            name: "No Encryption and TLS",
+                            tooltip: "This will also disable TLS",
+                            patches: [
+                                {
+                                    offset: 0x1CFBB58,
+                                    off: [
+                                        0x73, 0x00, 0x00, 0x00, 0x73, 0x00,
+                                        0x00, 0x00,
+                                    ],
+                                    on: [
+                                        0x00, 0x00, 0x00, 0x00, 0x00, 0x00,
+                                        0x00, 0x00,
+                                    ],
+                                },
+                            ],
+                        },
+                        {
+                            name: "Force 120 fps",
+                            tooltip: "Force the game to run in 120 Hz mode.",
+                            patches: [
+                                { offset: 0x1CBE9, off: [0x00], on: [0x01] },
                             ],
                         },
                     ]),
@@ -78,19 +180,19 @@
                             name: "Allow 127.0.0.1/localhost as the network server",
                             patches: [
                                 {
-                                    offset: 0x68f4c4,
-                                    off: [0x31, 0x32, 0x37, 0x2f],
-                                    on: [0x30, 0x2f, 0x38, 0x00],
+                                    offset: 0x68E8C4,
+                                    off: [0x31, 0x32, 0x37, 0x2F],
+                                    on: [0x30, 0x2F, 0x38, 0x00],
                                 },
                                 {
-                                    offset: 0x3974d4,
+                                    offset: 0x3968D4,
                                     off: [
-                                        0xff, 0x15, 0xbe, 0x5f, 0x1a, 0x00,
-                                        0x8b,
+                                        0xFF, 0x15, 0xBE, 0x5F, 0x1A, 0x00,
+                                        0x8B,
                                     ],
                                     on: [
-                                        0x33, 0xc0, 0x48, 0x83, 0xc4, 0x28,
-                                        0xc3,
+                                        0x33, 0xC0, 0x48, 0x83, 0xC4, 0x28,
+                                        0xC3,
                                     ],
                                 },
                             ],
@@ -98,7 +200,7 @@
                         {
                             name: "Infinite credits",
                             patches: [
-                                { offset: 0x2aeab8, off: [0x28], on: [0x08] },
+                                { offset: 0x2ADEB8, off: [0x28], on: [0x08] },
                             ],
                         },
                     ]),
